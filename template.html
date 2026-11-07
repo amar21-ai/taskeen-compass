@@ -331,7 +331,7 @@ function renderIntro(){
   <section class="band"><div class="inner">
     <span class="kicker">صناع الحياة الدقهلية · لجنة التسكين</span>
     <h1>بوصلة التسكين</h1>
-    <p class="lead">قبل ما تختار الملفات اللي هتتسكن فيها، جاوب على شوية أسئلة عن نفسك وطريقتك في الشغل، وهنرشحلك الأنسب ليك من الـ12 ملف والـ3 مشاريع، ونقولك ليه.</p>
+    <p class="lead">قبل ما تختار الملفات اللي هتتسكن فيها، جاوب على شوية أسئلة عن نفسك وطريقتك في الشغل، وهنرشحلك الأنسب ليك من الـ11 ملف والـ3 مشاريع، ونقولك ليه.</p>
     <div class="facts">
       <div><b>${toArabicNum(15)} سؤال</b><span>تقريبًا</span></div>
       <div><b>${toArabicNum(7)} دقايق</b><span>وقت الإجابة</span></div>
@@ -426,7 +426,7 @@ function renderResults(){
    <div class="callout info">الترشيحات مرتبة من الأنسب للأقل حسب إجاباتك. هتتسكن في <b>ملفين أساسيين بحد أقصى</b>، والقرار النهائي مع لجنة التسكين ومسؤولي الملفات.</div>
    ${favBlock}${flags.join("")}
 
-   <section class="rsec"><div class="rsec-head"><h2>الملفات المرشحة</h2><span>من ${toArabicNum(12)} ملف</span></div>
+   <section class="rsec"><div class="rsec-head"><h2>الملفات المرشحة</h2><span>من ${toArabicNum(ENT.filter(e=>e.type==="file").length)} ملف</span></div>
      ${R.topFiles.map((r,i)=>pickBlock(r,i+1)).join("")}</section>
    <section class="rsec"><div class="rsec-head"><h2>المشاريع المرشحة</h2><span>من ${toArabicNum(3)} مشاريع</span></div>
      ${R.topProjects.map((r,i)=>pickBlock(r,i+1)).join("")}</section>
@@ -476,7 +476,7 @@ function renderGuide(){
   document.getElementById("view-guide").innerHTML=`<main><div class="inner">
    <header class="guide-intro"><span class="kicker" style="color:var(--amber-ink)">دليل الملفات والمشاريع</span><h1>اعرف كل ملف قبل ما تختار</h1>
    <p>الملفات شغل مستمر طول السنة في الفرع. المشاريع تدخلات متخصصة ليها فئة مستهدفة وتدريب خاص. افتح أي واحد عشان تعرف هتعمل فيه إيه بالظبط.</p></header>
-   <section class="gsec"><h2>الملفات</h2><p>${toArabicNum(12)} ملف</p><div class="glist">${list("file")}</div></section>
+   <section class="gsec"><h2>الملفات</h2><p>${toArabicNum(ENT.filter(e=>e.type==="file").length)} ملف</p><div class="glist">${list("file")}</div></section>
    <section class="gsec"><h2>المشاريع</h2><p>${toArabicNum(3)} مشاريع</p><div class="glist">${list("project")}</div></section>
    <div class="actions" style="margin-top:28px"><a class="btn btn-primary" href="#quiz">ارجع للأسئلة</a></div>
   </div></main>`;

@@ -376,13 +376,6 @@ const ENT = [
   needs:"مناسب جدًا للمبتدئين. محتاج مجهود بدني وصبر.",
   w:{logi:5,data:3,events:3,persuade:2,talk:2},req:["physical"],time:1,causes:["families"],beginner:true,
   src:"دليل نظام المطابقة"},
- {id:"uni",type:"file",name:"صناع الحياة في الجامعات",en:"Life Makers at Universities",
-  tagline:"تبني حراك تطوعي جوه جامعة المنصورة والدلتا وحورس والمعاهد.",
-  does:["تبقى سفير المؤسسة في كليتك وتنشر إعلانات الأنشطة","تجهز معارض وتحجز موافقات الأنشطة الطلابية","تقود فريق طلابي وتوجّه المتطوعين الجداد للملفات"],
-  roles:["سفير الحرم الجامعي","منسق فعاليات جامعية","قائد فريق طلابي"],
-  needs:"لازم تكون طالب حاليًا أو قريب من الجامعة.",
-  w:{youth:5,talk:5,persuade:4,events:4,facil:3},req:[],time:1,causes:["skills","volunteers"],
-  src:"دليل نظام المطابقة"},
  {id:"dawwie",type:"project",name:"دوّي",en:"Do2y – Girls' Empowerment",
   tagline:"مبادرة وطنية لتمكين البنات والشباب من 10 لـ 18 سنة، بالشراكة مع اليونيسف والمشروع القومي لتنمية الأسرة.",
   does:["تيسّر دواير الحكي: مجموعة 10 أفراد بيتكلموا عن الذات والحقوق والصحة والمهارات","تساعد في شراكات الأماكن واللوجستيات (كروت القصص والأدوات)","تتابع الدواير وتدخل الداتا وتقيّم الميسرين"],
@@ -527,7 +520,6 @@ function scoreEntity(e,v,a){
   if(e.beginner && a.exp==="none") s+=0.05;
   const age=a.info&&a.info.age;
   if(e.minAge && age==="u17"){ s*=0.7; notes.push({k:"warn",t:`دور الميسر في ${e.name} لازم يكون 17 سنة أو أكبر. ممكن تشارك في الأدوار اللوجستية لحد ما توصل للسن ده.`}); }
-  if(e.id==="uni" && a.info && a.info.status!=="student" && a.info.status!=="grad") s*=0.6;
   s=Math.max(0,Math.min(0.98,s));
   // reasons
   const strengths = contrib.filter(c=>c.w>=3 && c.val>=3).sort((x,y)=>y.w*y.val-x.w*x.val).slice(0,3)
@@ -622,7 +614,7 @@ function renderIntro(){
   <section class="band"><div class="inner">
     <span class="kicker">صناع الحياة الدقهلية · لجنة التسكين</span>
     <h1>بوصلة التسكين</h1>
-    <p class="lead">قبل ما تختار الملفات اللي هتتسكن فيها، جاوب على شوية أسئلة عن نفسك وطريقتك في الشغل، وهنرشحلك الأنسب ليك من الـ12 ملف والـ3 مشاريع، ونقولك ليه.</p>
+    <p class="lead">قبل ما تختار الملفات اللي هتتسكن فيها، جاوب على شوية أسئلة عن نفسك وطريقتك في الشغل، وهنرشحلك الأنسب ليك من الـ11 ملف والـ3 مشاريع، ونقولك ليه.</p>
     <div class="facts">
       <div><b>${toArabicNum(15)} سؤال</b><span>تقريبًا</span></div>
       <div><b>${toArabicNum(7)} دقايق</b><span>وقت الإجابة</span></div>
@@ -717,7 +709,7 @@ function renderResults(){
    <div class="callout info">الترشيحات مرتبة من الأنسب للأقل حسب إجاباتك. هتتسكن في <b>ملفين أساسيين بحد أقصى</b>، والقرار النهائي مع لجنة التسكين ومسؤولي الملفات.</div>
    ${favBlock}${flags.join("")}
 
-   <section class="rsec"><div class="rsec-head"><h2>الملفات المرشحة</h2><span>من ${toArabicNum(12)} ملف</span></div>
+   <section class="rsec"><div class="rsec-head"><h2>الملفات المرشحة</h2><span>من ${toArabicNum(ENT.filter(e=>e.type==="file").length)} ملف</span></div>
      ${R.topFiles.map((r,i)=>pickBlock(r,i+1)).join("")}</section>
    <section class="rsec"><div class="rsec-head"><h2>المشاريع المرشحة</h2><span>من ${toArabicNum(3)} مشاريع</span></div>
      ${R.topProjects.map((r,i)=>pickBlock(r,i+1)).join("")}</section>
@@ -767,7 +759,7 @@ function renderGuide(){
   document.getElementById("view-guide").innerHTML=`<main><div class="inner">
    <header class="guide-intro"><span class="kicker" style="color:var(--amber-ink)">دليل الملفات والمشاريع</span><h1>اعرف كل ملف قبل ما تختار</h1>
    <p>الملفات شغل مستمر طول السنة في الفرع. المشاريع تدخلات متخصصة ليها فئة مستهدفة وتدريب خاص. افتح أي واحد عشان تعرف هتعمل فيه إيه بالظبط.</p></header>
-   <section class="gsec"><h2>الملفات</h2><p>${toArabicNum(12)} ملف</p><div class="glist">${list("file")}</div></section>
+   <section class="gsec"><h2>الملفات</h2><p>${toArabicNum(ENT.filter(e=>e.type==="file").length)} ملف</p><div class="glist">${list("file")}</div></section>
    <section class="gsec"><h2>المشاريع</h2><p>${toArabicNum(3)} مشاريع</p><div class="glist">${list("project")}</div></section>
    <div class="actions" style="margin-top:28px"><a class="btn btn-primary" href="#quiz">ارجع للأسئلة</a></div>
   </div></main>`;
