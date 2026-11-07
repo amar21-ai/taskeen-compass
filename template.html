@@ -150,6 +150,9 @@ main{padding-block:28px 56px}
 .summary>div+div{border-inline-start:1px solid var(--line)}
 .summary .k{font-family:var(--f-head);font-size:.82rem;font-weight:700;color:var(--muted)}
 .summary .v{font-family:var(--f-head);font-weight:800;font-size:1.1rem;color:var(--ink)}
+.summary .vline{display:flex;align-items:baseline;gap:8px}
+.summary .vline+.vline{margin-top:2px}
+.summary .vn{font-size:.85rem;color:var(--amber-ink);min-width:12px}
 @media (max-width:560px){.summary{grid-template-columns:1fr}.summary>div+div{border-inline-start:0;border-top:1px solid var(--line)}}
 .callout{border-radius:6px;padding:12px 16px;font-size:.95rem;margin-top:14px}
 .callout b{font-weight:600}
@@ -417,7 +420,7 @@ function renderResults(){
      <span class="date">${d.toLocaleDateString("ar-EG",{day:"numeric",month:"long",year:"numeric"})} · صناع الحياة الدقهلية · لجنة التسكين</span>
    </header>
    <div class="summary">
-     <div><div class="k">أنسب ملفين</div><div class="v">${R.topFiles.slice(0,2).map(r=>esc(byId[r.id].name)).join(" و")}</div></div>
+     <div><div class="k">أنسب ملفين</div><div class="v">${R.topFiles.slice(0,2).map((r,i)=>`<span class="vline"><span class="vn">${toArabicNum(i+1)}</span>${esc(byId[r.id].name)}</span>`).join("")}</div></div>
      <div><div class="k">أنسب مشروع</div><div class="v">${esc(byId[R.topProjects[0].id].name)}</div></div>
    </div>
    <div class="callout info">الترشيحات مرتبة من الأنسب للأقل حسب إجاباتك. هتتسكن في <b>ملفين أساسيين بحد أقصى</b>، والقرار النهائي مع لجنة التسكين ومسؤولي الملفات.</div>
