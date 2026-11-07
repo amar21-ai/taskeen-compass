@@ -410,15 +410,16 @@ function sheetRow(){
 }
 
 /* Google Sheet: paste the Apps Script Web app URL here */
-const SHEET_URL = "";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbxqevIK8diOQ4ht_trMtW1YuaHXoNcZHC9spVfBtywM7MkEH0g-rA-yA392lyCrdmABbQ/exec";
 let sheetStatus = SHEET_URL ? "pending" : "off";
 async function sendToSheet(){
   if(!SHEET_URL || !lastResult) return;
   const payload={row:sheetRow()};
   sheetStatus="saving"; updateSaveState();
   try{
-    await fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
-    sheetStatus="saved";
+    const res=await fetch(SHEET_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+    const j=await res.json();
+    sheetStatus=j&&j.ok?"saved":"error";
   }catch(e){ sheetStatus="error"; }
   updateSaveState();
 }
