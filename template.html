@@ -374,7 +374,54 @@ function collect(q,validate){
 function val(id){const e=document.getElementById(id);return e?e.value.trim():"";}
 
 /* ============ RESULTS ============ */
-function finish(){ lastResult=computeResults(A); saveDraft(); renderResults(); window.scrollTo({top:0}); saveSubmission(); }
+function finish(){ lastResult=computeResults(A); saveDraft(); renderResults(); window.scrollTo({top:0}); saveSubmission(); sendToSheet(); }
+
+/* One row for the committee sheet: [column, value] pairs in display order */
+function sheetRow(){
+  const R=lastResult, i=A.info||{}, row=[];
+  const AGE={"u17":"أقل من 17","17-20":"17 لـ 20","21-25":"21 لـ 25","26+":"26 أو أكبر"};
+  const STATUS={school:"طالب مدرسة",student:"طالب جامعة أو معهد",grad:"خريج",work:"بيشتغل"};
+  const pick=r=>r?`${byId[r.id].name} (${r.pct}%)`:"";
+  row.push(["الاسم",i.name||""],["الموبايل",i.phone||""],["السن",AGE[i.age]||""],["الحالة",STATUS[i.status]||""],["المركز",i.center||""]);
+  row.push(["ملف 1",pick(R.topFiles[0])],["ملف 2",pick(R.topFiles[1])],["ملف 3",pick(R.topFiles[2])],
+           ["مشروع 1",pick(R.topProjects[0])],["مشروع 2",pick(R.topProjects[1])]);
+  const fav=A.fav&&A.fav!=="none"?A.fav:null;
+  if(fav){ const list=byId[fav].type==="file"?R.files:R.projects; const ix=list.findIndex(r=>r.id===fav);
+    row.push(["كان في دماغه",`${byId[fav].name} (ترتيبه ${ix+1}، ${list[ix].pct}%)`]); }
+  else row.push(["كان في دماغه","لأ"]);
+  const notes=[]; if(R.flags.includes("beginner")) notes.push("مبتدئ"); if(R.flags.includes("promise")) notes.push("بيوعد الناس في المواقف الصعبة");
+  R.topFiles.concat(R.topProjects).forEach(r=>{ if(r.missing.length) notes.push(`${byId[r.id].name}: مش موافق على ${r.missing.map(m=>COMMIT[m]).join("، ")}`); });
+  row.push(["ملاحظات للجنة",notes.join(" | ")]);
+  // every answer, as the volunteer saw it
+  for(const q of visibleQs()){
+    if(q.id==="info"||q.id==="fav") continue;
+    const a=A[q.id];
+    if(q.kind==="scale"){ q.items.forEach(it=>row.push(["مهارة: "+it.t,(a&&a[it.d])||""])); continue; }
+    if(q.kind==="portfolio"){ const p=A.portfolio||{types:[]};
+      row.push(["نوع شغل الميديا",q.opts.filter(o=>p.types.includes(o.v)).map(o=>o.t).join("، ")],["لينك الأعمال",p.link||""]); continue; }
+    let text="";
+    if(q.kind==="single"){ const o=q.opts.find(o=>o.v===a); text=o?o.t:""; }
+    if(q.kind==="multi"){ text=q.opts.filter(o=>(a||[]).includes(o.v)).map(o=>o.t).join("، "); }
+    row.push(["س: "+q.title,text]);
+  }
+  // full score table
+  R.files.concat(R.projects).forEach(r=>row.push([`نسبة ${byId[r.id].type==="project"?"مشروع":"ملف"}: ${byId[r.id].name}`,r.pct]));
+  return row;
+}
+
+/* Google Sheet: paste the Apps Script Web app URL here */
+const SHEET_URL = "";
+let sheetStatus = SHEET_URL ? "pending" : "off";
+async function sendToSheet(){
+  if(!SHEET_URL || !lastResult) return;
+  const payload={row:sheetRow()};
+  sheetStatus="saving"; updateSaveState();
+  try{
+    await fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+    sheetStatus="saved";
+  }catch(e){ sheetStatus="error"; }
+  updateSaveState();
+}
 function fitLabel(p){return p>=75?"مناسب جدًا":p>=50?"مناسب":p>=30?"ممكن مع تدريب":"مش الأقرب ليك";}
 function pickBlock(r,rank){
   const e=byId[r.id]; const proj=e.type==="project";
@@ -508,6 +555,11 @@ async function saveSubmission(){
 }
 function updateSaveState(){
   const el=document.getElementById("saveState"); if(!el) return;
+  if(typeof sheetStatus!=="undefined" && sheetStatus!=="off"){
+    el.textContent={saving:"جاري إرسال ترشيحاتك للجنة التسكين...",saved:"ترشيحاتك وصلت للجنة التسكين. ولو حابب، ابعت الملخص كمان على جروب المتابعة.",
+      error:"مقدرناش نبعت ترشيحاتك أوتوماتيك. انسخ الملخص ده وابعته على جروب المتابعة.",pending:""}[sheetStatus]||"";
+    return;
+  }
   el.textContent = {saved:"ترشيحاتك اتحفظت ولجنة التسكين تقدر تشوفها. ولو حابب، ابعت الملخص كمان على جروب المتابعة.",
     saving:"جاري الحفظ..."}[saveStatus] || "انسخ الملخص ده وابعته على جروب المتابعة أو لمسؤول التسكين.";
 }
