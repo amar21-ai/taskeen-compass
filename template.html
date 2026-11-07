@@ -236,7 +236,7 @@ footer.foot p{font-size:.85rem}
 <body>
 <header class="masthead">
   <div class="inner">
-    <a class="brand" href="#quiz" aria-label="صناع الحياة الدقهلية – بوصلة التسكين">
+    <a class="brand" href="#quiz" id="brandLink" aria-label="الصفحة الرئيسية – بوصلة التسكين">
       <img src="logo-mark.png" alt="صناع الحياة – Life Makers Dakahlia" width="91" height="48">
       <span class="unit">لجنة التسكين<br>بوصلة التسكين</span>
     </a>
@@ -274,8 +274,8 @@ let screen = Object.keys(A).length ? "q" : "intro";
 const viewQuiz=document.getElementById("view-quiz");
 
 function renderQuiz(){
-  if(lastResult){ renderResults(); return; }
   if(screen==="intro"){ renderIntro(); return; }
+  if(lastResult){ renderResults(); return; }
   const qs=visibleQs(); if(step>=qs.length) step=qs.length-1;
   const q=qs[step];
   let body="";
@@ -338,7 +338,7 @@ function renderIntro(){
       <div><b>${toArabicNum(3)} ملفات + مشروعين</b><span>ترشيحات بأسبابها</span></div>
     </div>
     <div class="actions">
-      <button class="btn btn-amber" id="start" type="button">${resume?"كمّل من حيث وقفت":"ابدأ الأسئلة"}</button>
+      <button class="btn btn-amber" id="start" type="button">${lastResult?"اعرض نتيجتك":resume?"كمّل من حيث وقفت":"ابدأ الأسئلة"}</button>
       ${resume?`<button class="btn btn-onnavy" id="fresh" type="button">ابدأ من جديد</button>`:`<a class="btn btn-onnavy" href="#guide">اعرف الملفات الأول</a>`}
     </div>
   </div></section>
@@ -352,7 +352,7 @@ function renderIntro(){
     <div class="policy"><span class="lbl">سياسة التسكين</span><p>الترشيح بيساعدك تختار، لكنه مش القرار النهائي. بتتسكن في <b>ملفين أساسيين بحد أقصى</b> بعد ما تكمّل الحد الأدنى من ساعات المشاركة، وتقدر تشارك في باقي الملفات كنزولات فرعية.</p></div>
   </div></main>`;
   document.getElementById("start").onclick=()=>{screen="q";renderQuiz();window.scrollTo({top:0});};
-  const f=document.getElementById("fresh"); if(f) f.onclick=()=>{A={};step=0;saveDraft();screen="q";renderQuiz();};
+  const f=document.getElementById("fresh"); if(f) f.onclick=()=>{A={};step=0;lastResult=null;saveDraft();screen="q";renderQuiz();};
 }
 function showErr(t){const e=document.getElementById("err"); if(e){e.textContent=t;e.hidden=false;}}
 function collect(q,validate){
@@ -614,6 +614,10 @@ function route(){
 }
 renderGuide(); renderQuiz(); route();
 window.addEventListener("hashchange",route);
+document.getElementById("brandLink").addEventListener("click",e=>{
+  e.preventDefault(); screen="intro"; renderQuiz();
+  if(location.hash && location.hash!=="#quiz") location.hash="quiz"; else route();
+});
 </script>
 </body>
 </html>
