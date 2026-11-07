@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="بوصلة التسكين – صناع الحياة الدقهلية: جاوب على شوية أسئلة واعرف أنسب الملفات والمشاريع ليك.">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>بوصلة التسكين</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: one calm column like a guided interview card; tabs on top, one question per screen, results as a ranked list */
+:root{
+  --bg:#f3f5fa; --surface:#ffffff; --sunk:#e8ecf5; --fg:#152038; --muted:#5a6683; --line:#d5dbe8;
+  --accent:#1340a8; --accent-fg:#ffffff; --accent-soft:#e2e9fb; --warm:#d9485f; --warm-soft:#fbe7ea;
+  --good:#1d7a52; --good-soft:#e1f3ea; --warn:#a2610a; --warn-soft:#fbf0dc;
+  --f-display:"Alexandria","IBM Plex Sans Arabic",Tahoma,sans-serif;
+  --f-body:"IBM Plex Sans Arabic",Tahoma,"Segoe UI",sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0d1324; --surface:#151d33; --sunk:#1c2640; --fg:#e7ebf5; --muted:#9aa5c2; --line:#2a3655;
+  --accent:#7fa2ff; --accent-fg:#0b1430; --accent-soft:#1f2c52; --warm:#ff8196; --warm-soft:#3a1d27;
+  --good:#5fd39f; --good-soft:#163428; --warn:#f0b75a; --warn-soft:#3a2c12; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d1324; --surface:#151d33; --sunk:#1c2640; --fg:#e7ebf5; --muted:#9aa5c2; --line:#2a3655;
+  --accent:#7fa2ff; --accent-fg:#0b1430; --accent-soft:#1f2c52; --warm:#ff8196; --warm-soft:#3a1d27;
+  --good:#5fd39f; --good-soft:#163428; --warn:#f0b75a; --warn-soft:#3a2c12; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.75}
+.wrap{max-width:760px;margin:0 auto;padding-block:20px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.35}
+h1{font-size:clamp(1.7rem,5vw,2.3rem);font-weight:800}
+h2{font-size:1.35rem;font-weight:700}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+header.top{display:flex;flex-direction:column;gap:8px}
+.eyebrow{font-family:var(--f-display);font-size:.8rem;letter-spacing:.04em;color:var(--accent);font-weight:700}
+nav.tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:0}
+nav.tabs a{font-family:var(--f-display);font-weight:500;text-decoration:none;color:var(--muted);padding:10px 14px;border-bottom:3px solid transparent;margin-bottom:-1px}
+nav.tabs a[aria-current="page"]{color:var(--fg);border-color:var(--accent)}
+nav.tabs a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,label.opt:focus-within{outline:3px solid var(--accent);outline-offset:2px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.btn{font-family:var(--f-display);font-weight:700;font-size:1rem;border-radius:10px;padding:12px 22px;border:1px solid transparent;cursor:pointer;background:var(--accent);color:var(--accent-fg)}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row.between{justify-content:space-between}
+.progress{height:6px;background:var(--sunk);border-radius:6px;overflow:hidden}
+.progress>i{display:block;height:100%;background:var(--accent);transition:width .3s}
+@media (prefers-reduced-motion:reduce){.progress>i{transition:none}}
+.qnum{font-family:var(--f-display);font-size:.85rem;color:var(--muted)}
+.opts{display:grid;gap:10px}
+label.opt{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;background:var(--surface)}
+label.opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+label.opt input{margin-top:6px;accent-color:var(--accent);flex:none}
+label.opt span{min-width:0}
+.field{display:flex;flex-direction:column;gap:6px}
+.field input,.field select{font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:560px){.grid2{grid-template-columns:1fr}}
+.scale{display:grid;gap:12px}
+.scale .srow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}
+.scale .dots{display:flex;gap:4px;direction:ltr}
+.scale .dots label{width:36px;height:36px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;font-variant-numeric:tabular-nums;font-weight:600}
+.scale .dots input{position:absolute;opacity:0;pointer-events:none}
+.scale .dots label:has(input:checked){background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.scale .dots label:has(input:focus-visible){outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:420px){.scale .srow{grid-template-columns:1fr}.scale .dots label{width:40px}}
+.legend{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+.hint{font-size:.9rem;color:var(--muted)}
+.err{color:var(--warm);font-size:.9rem}
+/* results */
+.pickhead{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.pct{font-family:var(--f-display);font-weight:800;font-size:1.6rem;color:var(--accent);font-variant-numeric:tabular-nums}
+.rank{font-family:var(--f-display);font-size:.8rem;font-weight:700;color:var(--muted)}
+.bar{height:8px;background:var(--sunk);border-radius:8px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent)}
+.result{border-inline-start:4px solid var(--accent)}
+.result.proj{border-inline-start-color:var(--warm)}
+.result.proj .pct{color:var(--warm)}
+.result.proj .bar>i{background:var(--warm)}
+ul.list{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:.82rem;padding:3px 10px;border-radius:99px;background:var(--sunk);color:var(--fg)}
+.note{border-radius:12px;padding:12px 14px;font-size:.93rem}
+.note.good{background:var(--good-soft);color:var(--fg)}
+.note.warn{background:var(--warn-soft);color:var(--fg)}
+.note.info{background:var(--accent-soft);color:var(--fg)}
+.note b{font-weight:600}
+.sect{display:flex;flex-direction:column;gap:12px}
+.sect>h2{padding-top:8px}
+.mini{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.mini .m{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;gap:8px;font-size:.9rem}
+.mini .m b{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:600}
+details.ent{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 18px}
+details.ent summary{cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center;list-style:none}
+details.ent summary::-webkit-details-marker{display:none}
+details.ent summary h3{font-size:1.05rem}
+details.ent[open] summary{margin-bottom:10px}
+.tag{font-size:.75rem;font-family:var(--f-display);padding:2px 9px;border-radius:99px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.tag.p{background:var(--warm-soft);color:var(--warm)}
+.ent .body{display:flex;flex-direction:column;gap:10px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}
+th{font-family:var(--f-display);font-weight:500;color:var(--muted);font-size:.82rem}
+.toast{position:fixed;inset-inline:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));margin:0 auto;width:max-content;max-width:calc(100% - 32px);background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:10px;font-size:.92rem}
+textarea.copy{width:100%;min-height:140px;font:inherit;font-size:.85rem;border-radius:10px;border:1px solid var(--line);background:var(--sunk);color:var(--fg);padding:10px}
+</style>
+</head>
+<body>
+
+
+<div class="wrap" dir="rtl" lang="ar">
+  <header class="top">
+    <span class="eyebrow">صناع الحياة · الدقهلية · لجنة التسكين</span>
+    <h1>بوصلة التسكين</h1>
+    <p class="muted">جاوب على 15 سؤال في حوالي 7 دقايق، وهنقولك أنسب 3 ملفات وأنسب مشروعين ليك، وليه.</p>
+  </header>
+
+  <nav class="tabs" aria-label="أقسام الصفحة">
+    <a href="#quiz" data-tab="quiz">الأسئلة</a>
+    <a href="#guide" data-tab="guide">اعرف الملفات والمشاريع</a>
+    <a href="#committee" data-tab="committee" hidden id="tabCommittee">لوحة لجنة التسكين</a>
+  </nav>
+
+  <main id="view-quiz"></main>
+  <main id="view-guide" hidden></main>
+  <main id="view-committee" hidden></main>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+document.documentElement.dir = "rtl"; document.documentElement.lang = "ar";
+
+/* ============ DIMENSIONS ============ */
+const DIMS = {
+  talk:{label:"الكلام مع الناس", you:"مرتاح في الكلام مع الناس وقدامهم"},
+  listen:{label:"الاستماع والتعاطف", you:"بتعرف تسمع للناس وتصبر عليهم"},
+  persuade:{label:"الإقناع وبناء العلاقات", you:"بتعرف تقنع الناس وتكسب ثقتهم"},
+  data:{label:"الدقة والتوثيق", you:"دقيق ومنظم في التفاصيل والأرقام"},
+  digital:{label:"الشيتات والأدوات الرقمية", you:"شاطر في الشيتات والأدوات الرقمية"},
+  media:{label:"التصميم والتصوير والمونتاج", you:"عندك مهارة في التصميم أو التصوير أو المونتاج"},
+  write:{label:"الكتابة", you:"بتعرف تكتب كلام واضح ومؤثر"},
+  facil:{label:"الشرح وإدارة المجموعات", you:"بتعرف تشرح وتدير نقاش في مجموعة"},
+  kids:{label:"التعامل مع الأطفال", you:"بتحب الأطفال وصبور معاهم"},
+  incl:{label:"التعامل مع ذوي الإعاقة", you:"مرتاح ومتقبل في التعامل مع ذوي الإعاقة"},
+  logi:{label:"اللوجستيات والمجهود البدني", you:"مش بتمانع الشغل بإيدك والمجهود البدني"},
+  field:{label:"الشغل الميداني", you:"بتحب النزول الميداني للقرى والشارع"},
+  office:{label:"الشغل من على اللابتوب", you:"بتفضل الشغل من على اللابتوب أو من البيت"},
+  events:{label:"الفعاليات والجمهور", you:"بتحب الفعاليات والتعامل مع جمهور كبير"},
+  rapid:{label:"التصرف السريع تحت الضغط", you:"بتتصرف بهدوء وسرعة وقت الضغط"},
+  think:{label:"تحليل المشاكل واقتراح حلول", you:"بتحب تحلل المشكلة وتطلعلها حل عملي"},
+  youth:{label:"الوجود وسط الشباب والجامعة", you:"موجود في الجامعة ووسط الشباب"}
+};
+const COMMIT = {
+  conf:"الالتزام بسرية بيانات الأسر والمتطوعين",
+  child:"الالتزام بسياسة حماية الطفل (مفيش انفراد بطفل ولا تصوير من غير موافقة)",
+  train:"حضور تدريب إلزامي قبل البداية",
+  regular:"النزول بانتظام في مواعيد ثابتة",
+  physical:"مجهود بدني (شيل، تعبئة، وقوف فترات طويلة)"
+};
+const CAUSES = {
+  families:"الأسر الأكثر احتياجًا", kids:"الأطفال", teens:"البنات والشباب من 10 لـ 18 سنة",
+  disability:"الأشخاص ذوي الإعاقة", food:"الأكل والوجبات للمحتاجين", skills:"تطوير مهارات الشباب",
+  crisis:"الحالات العاجلة والطوارئ", volunteers:"المتطوعين وتجربتهم", image:"صورة المؤسسة والمحتوى", improve:"تطوير طريقة الشغل نفسها"
+};
+
+/* ============ ENTITIES (12 files + 3 projects) ============ */
+const ENT = [
+ {id:"case",type:"file",name:"إدارة الحالة",en:"Case Management",
+  tagline:"توصل للأسر الأكثر احتياجًا، تقيّم وضعها، وتوثقه بدقة وسرية عشان الدعم يوصل لمستحقه.",
+  does:["تنزل زيارات ميدانية للأسر وتملا استمارة البحث","تراجع المستندات (بطايق، تقارير طبية) وتدخل البيانات على السيستم","تتابع الأسرة بالتليفون أو بزيارة بعد ما تاخد الدعم"],
+  roles:["باحث ميداني","مسؤول إدخال وتدقيق بيانات","منسق متابعة أسر"],
+  needs:"المتطوع هنا جامع بيانات وباحث بس، مش هو اللي بيقرر الحالة مستحقة ولا لأ. السرية التامة شرط أساسي.",
+  w:{listen:5,data:5,field:5,digital:3,talk:3,regular:0},req:["conf","regular"],time:2,causes:["families"],
+  src:"إدارة الحالة 2026 · لائحة المساعدات الإنسانية · ملائمة الخدمات للمستفيدين"},
+ {id:"emerg",type:"file",name:"الطوارئ",en:"Emergency Response",
+  tagline:"الذراع السريع للتدخل في الحالات المفاجئة: دين بحكم، عملية عاجلة، وفاة عائل، أو بيت اتحرق أو هيقع.",
+  does:["تستقبل البلاغ وتعمل مكالمة أولية لمراجعة البيانات","تنزل زيارة ميدانية خلال 48 ساعة","تجهز المستندات وتساعد في تنفيذ التدخل خلال 72 ساعة"],
+  roles:["منسق اتصالات وبلاغات","مسؤول دعم لوجستي سريع","عضو ميداني للتدخل السريع"],
+  needs:"مش مطلوب تكون فاضي 24 ساعة، لكن مطلوب تقدر تتحرك بسرعة في الأوقات اللي بتحددها. محتاج هدوء وحياد في المواقف الصعبة.",
+  w:{rapid:5,field:4,logi:4,listen:3,talk:3,data:3},req:["conf"],time:1,causes:["crisis","families"],
+  src:"Emergency Presentation · لائحة المساعدات الإنسانية والطوارئ"},
+ {id:"attract",type:"file",name:"الجذب",en:"Recruitment & Attraction",
+  tagline:"تفتح قنوات توصل للناس وتجيب متطوعين جداد للمؤسسة.",
+  does:["تشارك في البوثات والفعاليات وتعرض رسالة المؤسسة","تكلم المسجلين الجداد بالتليفون وتأكد حضورهم","تكتب رسايل دعوة وإعلانات قصيرة مع الميديا"],
+  roles:["مسؤول حملات استقطاب","مسؤول متابعة المسجلين الجداد","كاتب رسايل استقطاب"],
+  needs:"مش شرط تكون مصمم أو بتاع ميديا. المهم إنك بتعرف تكلم الناس وتقنعهم وتتابعهم.",
+  w:{persuade:5,talk:5,events:4,write:3,digital:3,youth:2},req:[],time:1,causes:["volunteers"],beginner:true,
+  src:"دليل نظام المطابقة"},
+ {id:"media",type:"file",name:"الميديا",en:"Media & Content",
+  tagline:"تدير صورة المؤسسة على السوشيال وتوثق أثر الأنشطة بالصور والفيديو والكلام.",
+  does:["تصمم بوسترات وبنرات وتصاميم سوشيال","تصور الفعاليات وتعمل ريلز وفيديوهات قصيرة","تكتب كابشن وقصص ملهمة وتجدول النشر"],
+  roles:["مصمم جرافيك","مصور","مصور ومونتير فيديو","كاتب محتوى"],
+  needs:"الملف ده محتاج مهارة تقنية حقيقية مش حب للميديا بس. ممكن تبعت لينك أعمالك. التصوير لازم يحترم كرامة الناس ومينفعش تصوير أطفال من غير موافقة.",
+  w:{media:5,write:4,office:4,digital:2,events:1},req:[],time:1,causes:["image"],
+  src:"دليل نظام المطابقة · هيكل حملة Best Buddies · دوّي"},
+ {id:"support",type:"file",name:"الدعم والتواصل",en:"Communication & Support",
+  tagline:"حلقة الوصل بين المؤسسة والمتطوعين: ترد، تتابع، تحفّز، وتنقل المشاكل للمسؤول الصح.",
+  does:["ترد على استفسارات المتطوعين على واتساب وفيسبوك","تتابع المتطوعين المنقطعين أو اللي بيواجهوا صعوبات","تنظم الجروبات والإعلانات وتفكر بالمواعيد من غير ضغط"],
+  roles:["مسؤول الرد على الاستفسارات","مسؤول متابعة ورعاية المتطوعين","منسق تصعيد المشكلات"],
+  needs:"دورك مساندة وتنظيم، مش عقاب ولا قرارات بدل المسؤولين. المشاكل الكبيرة بتتصعد مع الحفاظ على الخصوصية.",
+  w:{listen:5,write:4,talk:3,office:3,digital:3,think:2},req:["conf"],time:1,causes:["volunteers"],
+  src:"دعم وتواصل · ملف التسكين"},
+ {id:"innov",type:"file",name:"الابتكار والإبداع",en:"Innovation & Creativity",
+  tagline:"ترصد المشاكل اللي بتعطل الشغل وتقترح حلول عملية تتجرب قبل ما تتعمم.",
+  does:["تدرس الصعوبات الميدانية وتعمل جلسات عصف ذهني","تعمل خطة تجريبية صغيرة لحل مشكلة وتقيس نجاحها","تدير ورش تفكير للملفات التانية"],
+  roles:["محلل مشكلات تشغيلية","مصمم نماذج وحلول","ميسر جلسات توليد أفكار"],
+  needs:"الابتكار هنا حل مشاكل وتفكير نقدي عملي، مش خيال نظري.",
+  w:{think:5,talk:3,facil:3,persuade:2,write:2,office:2,digital:2},req:[],time:1,causes:["improve"],
+  src:"دليل نظام المطابقة"},
+ {id:"recep",type:"file",name:"استقبال المتطوعين",en:"Reception & Onboarding",
+  tagline:"أول وش يقابل المتطوع الجديد: تعرّفه بالمؤسسة وقيمها وتساعده يكسر حاجز البداية.",
+  does:["تقدم الجلسات التعريفية وتشرح هيكل المؤسسة","تعمل مقابلات تعارف مع المتطوعين الجداد","ترافق المتطوع في أول مشاركة ليه"],
+  roles:["مقدم الجلسات التعريفية","مسؤول المقابلات والفرز","مرشد المتطوع الجديد"],
+  needs:"محتاج تكون فاهم المؤسسة كويس وبتعرف تبسط المعلومة.",
+  w:{talk:5,facil:4,persuade:4,listen:4,events:3},req:[],time:1,causes:["volunteers"],beginner:true,
+  src:"دليل نظام المطابقة · ملف التسكين"},
+ {id:"dev",type:"file",name:"التنمية وبناء القدرات",en:"Learning & Development",
+  tagline:"أكاديمية الملف: سيشنز وكورسات للطلبة والخريجين، واكتشاف المواهب وضمها للتطوع.",
+  does:["تنظم سيشنز وكورسات (جرافيك، منح دراسية، CV، ماركتينج، برمجة)","تجهز القاعات والمواعيد وجداول الحضور","تعمل استبيانات قبل وبعد التدريب وتقيس الاستفادة"],
+  roles:["مدرب / ميسر ورش","منسق فعاليات تدريبية","مسؤول قياس الاحتياج والأثر"],
+  needs:"الملف شغال أونلاين وأوفلاين. مش لازم تكون مدرب، في أدوار تنظيم ومتابعة.",
+  w:{facil:5,talk:4,data:3,digital:3,events:2,office:2},req:[],time:1,causes:["skills"],
+  src:"تقرير ملف التنمية – صناع الحياة الدقهلية"},
+ {id:"kids",type:"file",name:"أنشطة الأطفال",en:"Children Activities",
+  tagline:"فعاليات ترفيهية وتربوية لأطفال من 4 لـ 10 سنين: مسرح عرايس، ألعاب جماعية، رسم وتلوين.",
+  does:["تحرك عرايس أو تحكي قصة توعوية (التحرش، التنمر، الأمان على النت)","تدير ألعاب جماعية زي المراية وسباق الأقماع","تنظم ركن الرسم والتلوين والرسم على الوش"],
+  roles:["ميسر أنشطة وألعاب","مسؤول دعم فني (رسم، مسرح، أراجوز)","مراقب أمان الفعالية"],
+  needs:"سياسة حماية الطفل إلزامية: مفيش انفراد بأي طفل من غير إشراف، وممنوع تصوير الأطفال من غير موافقة مكتوبة. لو طفل حكى موقف مقلق بتبلغ المسؤول فورًا.",
+  w:{kids:5,facil:4,talk:3,events:2,media:1},req:["child"],time:1,causes:["kids"],
+  src:"مشروع الأطفال بمكاتب صناع الحياة"},
+ {id:"basic",type:"file",name:"الاحتياجات الأساسية",en:"Basic Needs",
+  tagline:"التدخلات العينية المباشرة: شنط غذائية، لحوم أضاحي، أغطية، كسوة، شنط مدرسية.",
+  does:["تستلم البضايع وتعبي وتحمّل وتفرّغ","تقف في نقط التوزيع وتنظم استلام الأسر باحترام","تطابق كشوف المستفيدين وتوقيعات الاستلام"],
+  roles:["مسؤول لوجستيات وتعبئة","عضو قوافل وتوزيع ميداني","مسؤول مطابقة كشوف المستفيدين"],
+  needs:"المتطوع مش بيحدد مين مستحق. التوزيع بيمشي على الكشوف الرسمية بس.",
+  w:{logi:5,field:4,data:3,events:3,rapid:2},req:["physical"],time:2,causes:["families","food"],beginner:true,
+  src:"ملائمة الخدمات للمستفيدين · دليل نظام المطابقة"},
+ {id:"expo",type:"file",name:"المعارض والفرز",en:"Exhibitions & Sorting",
+  tagline:"دورة تبرعات الهدوم كاملة: استلام وفرز وكي، لحد معرض شيك في القرية يحفظ كرامة الناس.",
+  does:["تستلم التبرعات وتفرزها (صالح، محتاج تصليح، مش لايق)","تصنف وتكوي وترتب حسب المقاس والفئة","تجهز قاعة المعرض وتساعد الأمهات يختاروا"],
+  roles:["استلام وحصر","فرز وتدقيق جودة","تجهيز وترتيب","خدمة جمهور في المعرض"],
+  needs:"مناسب جدًا للمبتدئين. محتاج مجهود بدني وصبر.",
+  w:{logi:5,data:3,events:3,persuade:2,talk:2},req:["physical"],time:1,causes:["families"],beginner:true,
+  src:"دليل نظام المطابقة"},
+ {id:"uni",type:"file",name:"صناع الحياة في الجامعات",en:"Life Makers at Universities",
+  tagline:"تبني حراك تطوعي جوه جامعة المنصورة والدلتا وحورس والمعاهد.",
+  does:["تبقى سفير المؤسسة في كليتك وتنشر إعلانات الأنشطة","تجهز معارض وتحجز موافقات الأنشطة الطلابية","تقود فريق طلابي وتوجّه المتطوعين الجداد للملفات"],
+  roles:["سفير الحرم الجامعي","منسق فعاليات جامعية","قائد فريق طلابي"],
+  needs:"لازم تكون طالب حاليًا أو قريب من الجامعة.",
+  w:{youth:5,talk:5,persuade:4,events:4,facil:3},req:[],time:1,causes:["skills","volunteers"],
+  src:"دليل نظام المطابقة"},
+ {id:"dawwie",type:"project",name:"دوّي",en:"Do2y – Girls' Empowerment",
+  tagline:"مبادرة وطنية لتمكين البنات والشباب من 10 لـ 18 سنة، بالشراكة مع اليونيسف والمشروع القومي لتنمية الأسرة.",
+  does:["تيسّر دواير الحكي: مجموعة 10 أفراد بيتكلموا عن الذات والحقوق والصحة والمهارات","تساعد في شراكات الأماكن واللوجستيات (كروت القصص والأدوات)","تتابع الدواير وتدخل الداتا وتقيّم الميسرين"],
+  roles:["ميسر دواير حكي","مسؤول الشراكات","مسؤول اللوجستيك","مسؤول المتابعة والتقييم","مسؤول الجذب / التفعيل / الميديا"],
+  needs:"الميسر لازم يكون 17 سنة أو أكبر ويحضر تدريب تيسير دواير الحكي. الدواير بنات بس أو شباب بس. الالتزام بحماية القاصرين شرط.",
+  w:{facil:5,listen:5,talk:4,field:2,events:2,logi:1,media:1,data:1},req:["child","train"],time:2,causes:["teens"],minAge:17,
+  src:"دوّي Dawwie"},
+ {id:"bb",type:"project",name:"أحسن صاحب",en:"Best Buddies",
+  tagline:"حملة لتقليل العزلة وبناء صداقات حقيقية مع الأشخاص ذوي الإعاقة الذهنية والنمائية.",
+  does:["تبني صداقة حقيقية مع صديق من ذوي الإعاقة وتتوثق","تنظم فعاليات دمج فنية وبيئية ومسابقة المواهب","تشارك في حملات توعية ميدانية وأونلاين بلغة الإشارة"],
+  roles:["متطوع رفيق دمج","مسؤول الفاعليات","مسؤول التفعيل","مسؤول اللوجستيات","مسؤول المتابعة والتقييم","مسؤول الميديا"],
+  needs:"التدريب على التعامل مع ذوي الإعاقة إلزامي قبل ما تبدأ. التعامل بيكون باحترام واستقلالية، مش شفقة.",
+  w:{incl:5,listen:4,talk:3,events:3,logi:2,media:1},req:["train"],time:2,causes:["disability"],
+  src:"مقترح مشروع أحسن صاحب 2026 · هيكل الحملة بالمحافظات"},
+ {id:"saboura",type:"project",name:"سبورة المحروسة",en:"Saboura El Mahrousa – عيش وملح",
+  tagline:"الزبون يشتري وجبة زيادة تتعلق على سبورة في المطعم، والمتطوعين يتابعوا ويستلموا ويوزعوا على الأسر.",
+  does:["تزور مطاعم وتقنعها تنضم للمبادرة (من غير أي نسبة للمؤسسة)","تتابع السبورات كل 3 أيام أو كل أسبوع وتملا كراسة المتابعة","تستلم الوجبات وتوزعها بكرامة، وتسجل الأعداد على السيستم"],
+  roles:["مسؤول متابعة المطاعم","مسؤول الاستلام والتوزيع","مسؤول التسجيل على النظام"],
+  needs:"كل متطوع بيتابع حوالي 10 مطاعم. محتاج أمانة ودقة في الأرقام والتزام بالمواعيد.",
+  w:{persuade:5,data:4,field:4,talk:3,logi:3},req:["regular"],time:2,causes:["food","families"],
+  src:"سبورة المحروسة – عيش وملح · ملف سبورة المحروسة"}
+];
+const byId = Object.fromEntries(ENT.map(e=>[e.id,e]));
+
+/* ============ QUESTIONS ============ */
+// add: {dim:amount}. Profile values are accumulated then clamped to 0..5.
+const Q = [
+ {id:"info",kind:"info",title:"نتعرف عليك الأول"},
+ {id:"fav",kind:"single",title:"في ملف أو مشروع في دماغك من دلوقتي؟",hint:"مش لازم. لو اخترت، هنقولك بصراحة هو مناسب ليك قد إيه.",
+  opts:[{v:"none",t:"لأ، لسه مش عارف"}].concat(ENT.map(e=>({v:e.id,t:(e.type==="project"?"مشروع ":"ملف ")+e.name})))},
+ {id:"env",kind:"multi",max:2,title:"أنهي بيئة شغل بتريحك أكتر؟",hint:"اختار حاجة أو اتنين.",
+  opts:[
+   {v:"field",t:"ميداني: نزول قرى وشارع وزيارات بيوت",add:{field:5}},
+   {v:"office",t:"من على اللابتوب أو من البيت، بمواعيد مرنة",add:{office:5,digital:1}},
+   {v:"crowd",t:"قدام جمهور: فعاليات وبوثات ومعارض",add:{events:5,talk:1}},
+   {v:"hands",t:"شغل بإيدي: تعبئة وترتيب وتحميل",add:{logi:5}},
+   {v:"room",t:"قاعة فيها مجموعة بشرح لهم أو بدير نقاش",add:{facil:4,talk:1}}]},
+ {id:"friday",kind:"single",title:"عندك يوم جمعة فاضي للتطوع. أنهي مهمة تختارها؟",
+  opts:[
+   {v:"a",t:"أزور أسرة، أسمع ظروفها، وأكتب تقرير دقيق",add:{field:2,listen:2,data:2}},
+   {v:"b",t:"أصمم بوستر أو أعمل فيديو للحملة",add:{media:3,office:1}},
+   {v:"c",t:"أقف في بوث في الجامعة أكلم الناس عن التطوع",add:{persuade:3,talk:2,events:1,youth:1}},
+   {v:"d",t:"أنظم ورشة أو أشرح حاجة لمجموعة",add:{facil:3,talk:1}},
+   {v:"e",t:"أفرز تبرعات وأجهز كراتين",add:{logi:3,data:1}},
+   {v:"f",t:"أقعد مع أطفال ألعب معاهم وأحكيلهم حكاية",add:{kids:3,facil:1}},
+   {v:"g",t:"ألاقي حل لمشكلة بتتكرر في الشغل",add:{think:3}}]},
+ {id:"skills",kind:"scale",title:"قيّم نفسك بصراحة في المهارات دي",hint:"1 = لسه مبتدئ خالص، 5 = بعملها كويس جدًا وعندي خبرة. مفيش إجابة غلط.",
+  items:[
+   {d:"talk",t:"الكلام قدام مجموعة من الناس"},
+   {d:"persuade",t:"إقناع حد متردد"},
+   {d:"data",t:"التنظيم والدقة في التفاصيل والأرقام"},
+   {d:"digital",t:"Excel أو Google Sheets"},
+   {d:"media",t:"التصميم أو التصوير أو المونتاج"},
+   {d:"write",t:"كتابة بوست أو رسالة مؤثرة"},
+   {d:"facil",t:"شرح حاجة لمجموعة وإدارة النقاش"}]},
+ {id:"portfolio",kind:"portfolio",title:"إيه نوع شغل الميديا اللي بتعمله؟",showIf:a=>(a.skills&&a.skills.media>=3)||(a.friday==="b"),
+  hint:"لو عندك لينك لأعمالك (Drive, Behance, فيسبوك) حطه هنا. اختياري بس بيساعد اللجنة.",
+  opts:[{v:"design",t:"تصميم جرافيك"},{v:"photo",t:"تصوير فوتوغرافي"},{v:"video",t:"تصوير ومونتاج فيديو"},{v:"copy",t:"كتابة محتوى وإدارة صفحات"}]},
+ {id:"listen",kind:"single",title:"حد بيحكيلك عن ظرف صعب وهو منفعل ومتضايق. إيه الأقرب لتصرفك؟",
+  opts:[
+   {v:"a",t:"أسيبه يخلص كلامه للآخر، وأسمعه بهدوء، وبعدين أسأل",add:{listen:5}},
+   {v:"b",t:"أطمنه وأقوله إن كل حاجة هتتحل",add:{listen:2},flag:"promise"},
+   {v:"c",t:"أدخل على طول في حلول عملية يعملها",add:{listen:1,think:2,rapid:1}},
+   {v:"d",t:"بتوتر ومبكونش عارف أقول إيه",add:{}}]},
+ {id:"pressure",kind:"single",title:"في قافلة توزيع، العربيات اتأخرت والمكان زحم جدًا. هتعمل إيه؟",
+  opts:[
+   {v:"a",t:"أتعاون مع زمايلي نظبط الصفوف ونهدّي الناس",add:{rapid:5,logi:1,events:1}},
+   {v:"b",t:"أبلّغ المسؤول، وأوثق اللي بيحصل، وأتابع التليفونات",add:{rapid:3,data:2}},
+   {v:"c",t:"أستنى المسؤول يقول نعمل إيه",add:{rapid:1}},
+   {v:"d",t:"الزحمة بتضايقني وبفضل أبعد عنها",add:{events:-3,field:-1}}]},
+ {id:"kidsQ",kind:"single",title:"إحساسك لما تكون مع مجموعة أطفال من 4 لـ 10 سنين؟",
+  opts:[
+   {v:"a",t:"بحبهم جدًا وعندي صبر عليهم وعلى دوشتهم",add:{kids:5}},
+   {v:"b",t:"عادي، أقدر أتعامل",add:{kids:2}},
+   {v:"c",t:"مش مجالي",add:{kids:-3}}]},
+ {id:"inclQ",kind:"single",title:"لو قعدت مع شاب من ذوي الإعاقة الذهنية عشان تبقوا أصحاب، إحساسك هيبقى إيه؟",
+  opts:[
+   {v:"a",t:"عادي جدًا، وبحب أبني صداقة حقيقية",add:{incl:5}},
+   {v:"b",t:"معنديش خبرة بس حابب أتعلم",add:{incl:3}},
+   {v:"c",t:"مش متأكد إني هعرف أتعامل",add:{incl:0}}]},
+ {id:"restaurant",kind:"single",title:"تقدر تدخل مطعم وتقنع المدير ينضم لمبادرة خيرية من غير أي مقابل؟",
+  opts:[
+   {v:"a",t:"أيوه وبستمتع بالحاجات دي",add:{persuade:3,talk:1}},
+   {v:"b",t:"لو معايا حد في الأول",add:{persuade:1}},
+   {v:"c",t:"لأ، صعب عليا",add:{persuade:-1}}]},
+ {id:"problem",kind:"single",title:"لاحظت مشكلة بتتكرر في طريقة الشغل. غالبًا هتعمل إيه؟",
+  opts:[
+   {v:"a",t:"أحللها، أقترح حل، وأطلب أجربه على نطاق صغير",add:{think:5}},
+   {v:"b",t:"أبلّغ المسؤول وأشرحله اللي شايفه",add:{think:2,listen:1}},
+   {v:"c",t:"أكمل شغلي عادي",add:{}}]},
+ {id:"causes",kind:"multi",max:3,title:"أنهي قضايا بتلمسك أكتر؟",hint:"اختار لحد 3.",
+  opts:Object.entries(CAUSES).map(([v,t])=>({v,t}))},
+ {id:"time",kind:"single",title:"كام ساعة في الأسبوع تقدر تلتزم بيها بشكل منتظم؟",
+  opts:[{v:"0",t:"أقل من 3 ساعات"},{v:"1",t:"من 3 لـ 6 ساعات"},{v:"2",t:"من 6 لـ 10 ساعات"},{v:"3",t:"أكتر من 10 ساعات"}]},
+ {id:"urgent",kind:"single",title:"لو حصلت حالة طارئة، تقدر تنزل خلال 48 ساعة؟",
+  opts:[{v:"a",t:"غالبًا أيوه",add:{rapid:2}},{v:"b",t:"ساعات",add:{rapid:1}},{v:"c",t:"نادرًا",add:{rapid:-2}}]},
+ {id:"commit",kind:"multi",title:"أنهي حاجات من دول توافق تلتزم بيها؟",hint:"اختار كل اللي توافق عليه بجد. بعض الملفات ليها شروط إلزامية.",
+  opts:Object.entries(COMMIT).map(([v,t])=>({v,t}))},
+ {id:"exp",kind:"single",title:"اتطوعت قبل كدا؟",
+  opts:[{v:"none",t:"لأ، دي أول مرة"},{v:"some",t:"شوية، في أنشطة متفرقة"},{v:"lots",t:"أيوه، اشتغلت في ملف أو فريق قبل كدا"}]}
+];
+
+/* ============ STATE ============ */
+let A = {};           // answers
+let step = 0;
+let lastResult = null;
+const DRAFT_KEY = "taskeen-draft-v1";
+try{ const d = JSON.parse(localStorage.getItem(DRAFT_KEY)||"null"); if(d&&d.A){A=d.A;step=Math.min(d.step||0,Q.length-1);} }catch(e){}
+function saveDraft(){ try{localStorage.setItem(DRAFT_KEY,JSON.stringify({A,step}));}catch(e){} }
+
+const visibleQs = ()=>Q.filter(q=>!q.showIf||q.showIf(A));
+const esc = s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const toArabicNum = n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+
+/* ============ SCORING ============ */
+function buildProfile(a){
+  const v = Object.fromEntries(Object.keys(DIMS).map(k=>[k,0]));
+  const add = obj=>{ for(const k in obj) v[k]+=obj[k]; };
+  for(const q of Q){
+    const ans = a[q.id]; if(ans==null) continue;
+    if(q.kind==="single"){ const o=q.opts.find(o=>o.v===ans); if(o&&o.add) add(o.add); }
+    if(q.kind==="multi"){ for(const o of q.opts) if(ans.includes(o.v)&&o.add) add(o.add); }
+    if(q.kind==="scale"){ for(const it of q.items){ const r=ans[it.d]; if(r) v[it.d]+= (r-1)*1.1; } }
+  }
+  if(a.info && (a.info.status==="student")) v.youth+=4;
+  if(a.info && (a.info.status==="grad")) v.youth+=1;
+  for(const k in v) v[k]=Math.max(0,Math.min(5,v[k]));
+  return v;
+}
+function scoreEntity(e,v,a){
+  let num=0,den=0; const contrib=[];
+  for(const d in e.w){ const w=e.w[d]; if(!w) continue; num+=w*v[d]; den+=w*5; contrib.push({d,w,val:v[d]}); }
+  let s = den? num/den : 0;
+  const notes=[]; const missing=[];
+  const commits = a.commit||[];
+  for(const r of e.req) if(!commits.includes(r)) missing.push(r);
+  if(missing.length) s*=0.55;
+  const hours = a.time!=null? +a.time : 1;
+  if(hours < e.time){ s*=0.85; notes.push({k:"warn",t:`${e.name} محتاج وقت أكتر من اللي اخترته (${hours===0?"أقل من 3 ساعات":"3 لـ 6 ساعات"} في الأسبوع).`}); }
+  const causes=a.causes||[]; const hit=e.causes.filter(c=>causes.includes(c));
+  if(hit.length) s+=0.08;
+  if(e.beginner && a.exp==="none") s+=0.05;
+  const age=a.info&&a.info.age;
+  if(e.minAge && age==="u17"){ s*=0.7; notes.push({k:"warn",t:`دور الميسر في ${e.name} لازم يكون 17 سنة أو أكبر. ممكن تشارك في الأدوار اللوجستية لحد ما توصل للسن ده.`}); }
+  if(e.id==="uni" && a.info && a.info.status!=="student" && a.info.status!=="grad") s*=0.6;
+  s=Math.max(0,Math.min(0.98,s));
+  // reasons
+  const strengths = contrib.filter(c=>c.w>=3 && c.val>=3).sort((x,y)=>y.w*y.val-x.w*x.val).slice(0,3)
+     .map(c=>`انت ${DIMS[c.d].you}، ودي من أهم حاجات ${e.name}.`);
+  if(hit.length) strengths.push(`قلت إن قضية "${hit.map(c=>CAUSES[c]).join("، ")}" بتلمسك، ودي بالظبط اللي ${e.name} شغال عليه.`);
+  if(e.beginner && a.exp==="none") strengths.push(`${e.name} من أنسب الأماكن للبداية لو أول مرة تتطوع.`);
+  const gaps = contrib.filter(c=>c.w>=4 && c.val<2.5).sort((x,y)=>y.w-x.w).slice(0,2)
+     .map(c=>`${e.name} معتمد كتير على ${DIMS[c.d].label}، وانت لسه في البداية فيها. دي حاجة بتتعلم بالتدريب والممارسة.`);
+  return {id:e.id,score:s,pct:Math.round(s*100),strengths,gaps,missing,notes};
+}
+function computeResults(a){
+  const v=buildProfile(a);
+  const all=ENT.map(e=>scoreEntity(e,v,a)).sort((x,y)=>y.score-x.score);
+  const files=all.filter(r=>byId[r.id].type==="file");
+  const projects=all.filter(r=>byId[r.id].type==="project");
+  const skillVals = a.skills? Object.values(a.skills):[];
+  const lowSkills = skillVals.length && skillVals.every(x=>x<=2);
+  const flags=[];
+  if(lowSkills || a.exp==="none") flags.push("beginner");
+  const lis=Q.find(q=>q.id==="listen").opts.find(o=>o.v===a.listen);
+  if(lis&&lis.flag==="promise") flags.push("promise");
+  const answered = visibleQs().filter(q=>a[q.id]!=null && !(Array.isArray(a[q.id])&&!a[q.id].length)).length;
+  let confidence = answered/visibleQs().length;
+  if(a.portfolio && a.portfolio.link) confidence=Math.min(1,confidence+0.05);
+  return {profile:v,files,projects,topFiles:files.slice(0,3),topProjects:projects.slice(0,2),flags,confidence,at:new Date().toISOString()};
+}
+
+/* ============ RENDER: QUIZ ============ */
+const viewQuiz=document.getElementById("view-quiz");
+function renderQuiz(){
+  if(lastResult){ renderResults(); return; }
+  const qs=visibleQs(); if(step>=qs.length) step=qs.length-1;
+  const q=qs[step]; const pct=Math.round(step/qs.length*100);
+  let body="";
+  if(q.kind==="info"){
+    const i=A.info||{};
+    body=`<div class="grid2">
+      <div class="field"><label for="f-name">اسمك</label><input id="f-name" value="${esc(i.name)}" autocomplete="name" placeholder="مثلًا: سارة محمد"></div>
+      <div class="field"><label for="f-phone">رقم الموبايل (واتساب)</label><input id="f-phone" inputmode="tel" dir="ltr" value="${esc(i.phone)}" placeholder="01xxxxxxxxx"></div>
+      <div class="field"><label for="f-age">سنك</label><select id="f-age">
+        ${[["","اختار"],["u17","أقل من 17"],["17-20","من 17 لـ 20"],["21-25","من 21 لـ 25"],["26+","26 أو أكبر"]].map(([v,t])=>`<option value="${v}" ${i.age===v?"selected":""}>${t}</option>`).join("")}</select></div>
+      <div class="field"><label for="f-status">انت حاليًا</label><select id="f-status">
+        ${[["","اختار"],["school","طالب مدرسة"],["student","طالب جامعة أو معهد"],["grad","خريج"],["work","بشتغل"]].map(([v,t])=>`<option value="${v}" ${i.status===v?"selected":""}>${t}</option>`).join("")}</select></div>
+      <div class="field"><label for="f-center">المركز / المدينة</label><input id="f-center" value="${esc(i.center)}" placeholder="المنصورة، طلخا، ميت غمر..."></div>
+    </div><p class="hint">بياناتك بتوصل للجنة التسكين بس، عشان يتواصلوا معاك.</p>`;
+  } else if(q.kind==="single"||q.kind==="multi"){
+    const type=q.kind==="single"?"radio":"checkbox"; const cur=A[q.id];
+    body=`<div class="opts" role="${q.kind==="single"?"radiogroup":"group"}" aria-label="${esc(q.title)}">${q.opts.map((o,ix)=>{
+      const checked = q.kind==="single"? cur===o.v : (cur||[]).includes(o.v);
+      return `<label class="opt"><input type="${type}" name="q-${q.id}" id="q-${q.id}-${ix}" value="${esc(o.v)}" ${checked?"checked":""}><span>${esc(o.t)}</span></label>`;}).join("")}</div>`;
+  } else if(q.kind==="scale"){
+    const cur=A[q.id]||{};
+    body=`<div class="scale">${q.items.map(it=>`<div class="srow"><span>${esc(it.t)}</span><div class="dots" role="radiogroup" aria-label="${esc(it.t)}">${[1,2,3,4,5].map(n=>`<label><input type="radio" name="s-${it.d}" id="s-${it.d}-${n}" value="${n}" ${cur[it.d]===n?"checked":""}>${n}</label>`).join("")}</div></div>`).join("")}</div>
+    <div class="legend"><span>1 مبتدئ</span><span>5 خبير</span></div>`;
+  } else if(q.kind==="portfolio"){
+    const cur=A.portfolio||{types:[],link:""};
+    body=`<div class="opts">${q.opts.map((o,ix)=>`<label class="opt"><input type="checkbox" name="q-portfolio" id="q-portfolio-${ix}" value="${o.v}" ${cur.types.includes(o.v)?"checked":""}><span>${esc(o.t)}</span></label>`).join("")}</div>
+    <div class="field"><label for="f-link">لينك أعمالك (اختياري)</label><input id="f-link" dir="ltr" value="${esc(cur.link)}" placeholder="https://"></div>`;
+  }
+  viewQuiz.innerHTML=`<section class="card" aria-live="polite">
+    <div class="progress" aria-hidden="true"><i style="width:${pct}%"></i></div>
+    <div class="row between"><span class="qnum">سؤال ${toArabicNum(step+1)} من ${toArabicNum(qs.length)}</span>${step>0?`<button class="btn ghost" id="restart" type="button" style="padding:6px 12px;font-size:.85rem">ابدأ من الأول</button>`:""}</div>
+    <h2>${esc(q.title)}</h2>${q.hint?`<p class="hint">${esc(q.hint)}</p>`:""}
+    ${body}
+    <p class="err" id="err" hidden></p>
+    <div class="row between">
+      <button class="btn ghost" id="back" type="button" ${step===0?"disabled":""}>السابق</button>
+      <button class="btn" id="next" type="button">${step===qs.length-1?"اعرف نتيجتك":"التالي"}</button>
+    </div></section>
+    <p class="small muted">مش فاهم ملف معين؟ افتح <a href="#guide">اعرف الملفات والمشاريع</a> وارجع، إجاباتك محفوظة.</p>`;
+  // multi max
+  if(q.kind==="multi"&&q.max){ viewQuiz.querySelectorAll(`input[name="q-${q.id}"]`).forEach(inp=>inp.addEventListener("change",()=>{
+    const ch=[...viewQuiz.querySelectorAll(`input[name="q-${q.id}"]:checked`)];
+    if(ch.length>q.max){ inp.checked=false; showErr(`اختار ${q.max===2?"اتنين":"تلاتة"} بالكتير.`);} }));}
+  document.getElementById("back").onclick=()=>{collect(q,false);step--;saveDraft();renderQuiz();};
+  document.getElementById("next").onclick=()=>{ if(!collect(q,true)) return; if(step===visibleQs().length-1){finish();} else {step++;saveDraft();renderQuiz();window.scrollTo({top:0});} };
+  const rs=document.getElementById("restart"); if(rs) rs.onclick=()=>{A={};step=0;saveDraft();renderQuiz();};
+}
+function showErr(t){const e=document.getElementById("err"); if(e){e.textContent=t;e.hidden=false;}}
+function collect(q,validate){
+  if(q.kind==="info"){
+    const i={name:val("f-name"),phone:val("f-phone"),age:val("f-age"),status:val("f-status"),center:val("f-center")};
+    A.info=i;
+    if(validate && (!i.name||!i.age||!i.status)){showErr("محتاجين اسمك وسنك وانت بتعمل إيه حاليًا.");return false;}
+    return true;
+  }
+  if(q.kind==="single"){ const c=viewQuiz.querySelector(`input[name="q-${q.id}"]:checked`); if(c) A[q.id]=c.value;
+    if(validate&&!c){showErr("اختار إجابة عشان نكمل.");return false;} return true;}
+  if(q.kind==="multi"){ A[q.id]=[...viewQuiz.querySelectorAll(`input[name="q-${q.id}"]:checked`)].map(x=>x.value);
+    if(validate&&q.id!=="commit"&&!A[q.id].length){showErr("اختار حاجة واحدة على الأقل.");return false;} return true;}
+  if(q.kind==="scale"){ const o={}; for(const it of q.items){const c=viewQuiz.querySelector(`input[name="s-${it.d}"]:checked`); if(c) o[it.d]=+c.value;}
+    A[q.id]=o; if(validate&&Object.keys(o).length<q.items.length){showErr("قيّم نفسك في كل المهارات.");return false;} return true;}
+  if(q.kind==="portfolio"){ A.portfolio={types:[...viewQuiz.querySelectorAll(`input[name="q-portfolio"]:checked`)].map(x=>x.value),link:val("f-link")}; return true;}
+  return true;
+}
+function val(id){const e=document.getElementById(id);return e?e.value.trim():"";}
+
+/* ============ RESULTS ============ */
+function finish(){
+  lastResult=computeResults(A); saveDraft();
+  renderResults(); window.scrollTo({top:0});
+  saveSubmission();
+}
+function resultCard(r,rank){
+  const e=byId[r.id]; const proj=e.type==="project";
+  return `<article class="card result ${proj?"proj":""}">
+    <div class="pickhead"><div><span class="rank">${proj?"مشروع":"ملف"} · اختيار ${toArabicNum(rank)} · ${fitLabel(r.pct)}</span><h3>${esc(e.name)}</h3></div><span class="pct">${toArabicNum(r.pct)}٪</span></div>
+    <div class="bar" aria-hidden="true"><i style="width:${r.pct}%"></i></div>
+    <p>${esc(e.tagline)}</p>
+    ${r.strengths.length?`<div><b>ليه مناسب ليك</b><ul class="list">${r.strengths.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>`:""}
+    <div><b>هتعمل إيه فيه</b><ul class="list">${e.does.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>
+    ${r.gaps.length?`<div class="note warn"><b>حاجة تاخد بالك منها: </b>${r.gaps.map(esc).join(" ")}</div>`:""}
+    ${r.missing.length?`<div class="note warn"><b>شرط إلزامي: </b>عشان تدخل ${esc(e.name)} لازم توافق على: ${r.missing.map(m=>esc(COMMIT[m])).join("، ")}.</div>`:""}
+    ${r.notes.map(n=>`<div class="note warn">${esc(n.t)}</div>`).join("")}
+    ${proj&&r.pct<45?`<div class="note info">الدور الأساسي في ${esc(e.name)} مش أقرب حاجة ليك، بس المشروع فيه أدوار مساندة (${esc(e.roles.slice(1).join("، "))}) ممكن تشارك فيها بمهاراتك.</div>`:""}
+  </article>`;
+}
+function fitLabel(p){return p>=75?"مناسب جدًا":p>=50?"مناسب":p>=30?"ممكن مع تدريب":"مش الأقرب ليك";}
+function renderResults(){
+  const R=lastResult; const name=(A.info&&A.info.name)||"";
+  const fav=A.fav&&A.fav!=="none"?A.fav:null; let favBlock="";
+  if(fav){
+    const list=byId[fav].type==="file"?R.files:R.projects; const ix=list.findIndex(r=>r.id===fav); const r=list[ix]; const e=byId[fav];
+    const top=byId[fav].type==="file"?3:2;
+    if(ix<top) favBlock=`<div class="note good"><b>${esc(e.name)}</b> اللي كان في دماغك طلع من أنسب اختياراتك (رقم ${toArabicNum(ix+1)}). اختيارك في محله.</div>`;
+    else favBlock=`<div class="note info"><b>عن ${esc(e.name)} اللي كان في دماغك:</b> طلع رقم ${toArabicNum(ix+1)} من ${toArabicNum(list.length)} بنسبة ${toArabicNum(r.pct)}٪. ${r.gaps.length?esc(r.gaps[0]):""} ${r.missing.length?"وفيه شرط إلزامي مش موافق عليه: "+esc(COMMIT[r.missing[0]])+".":""} ده مش معناه إنك متدخلوش، بس اتكلم مع لجنة التسكين عنه وجرّبه كنزول فرعي الأول.</div>`;
+  }
+  const flagNotes=[];
+  if(R.flags.includes("beginner")) flagNotes.push(`<div class="note info"><b>أول مرة؟ ولا يهمك.</b> قلة الخبرة مش عائق. ملف التنمية بيقدم كورسات وسيشنز تساعدك تبني مهاراتك وانت شغال.</div>`);
+  if(R.flags.includes("promise")) flagNotes.push(`<div class="note info"><b>ملحوظة صغيرة:</b> في ملفات زي إدارة الحالة والطوارئ، مينفعش نوعد الأسرة بحاجة لأن القرار مش في إيد المتطوع. الأفضل نسمع ونطمن من غير وعود.</div>`);
+  const rest=R.files.slice(3);
+  viewQuiz.innerHTML=`
+  <section class="card">
+    <span class="eyebrow">نتيجتك${name?" يا "+esc(name.split(" ")[0]):""}</span>
+    <h2>أنسب ملفين أو تلاتة ومشروع ليك</h2>
+    <p>دي ترشيحات مبنية على إجاباتك، مرتبة من الأنسب للأقل. حسب سياسة التسكين هتتسكن في <b>ملفين أساسيين بحد أقصى</b>، وتقدر تشارك في باقي الملفات كنزولات فرعية. القرار النهائي بيتاخد مع لجنة التسكين ومسؤولي الملفات.</p>
+    ${favBlock}${flagNotes.join("")}
+    <div class="row" id="saveRow"><span class="small muted" id="saveState">جاري حفظ نتيجتك للجنة...</span></div>
+  </section>
+  <section class="sect"><h2>أنسب 3 ملفات</h2>${R.topFiles.map((r,i)=>resultCard(r,i+1)).join("")}</section>
+  <section class="sect"><h2>أنسب مشروعين</h2>${R.topProjects.map((r,i)=>resultCard(r,i+1)).join("")}</section>
+  <section class="sect"><h2>باقي الملفات</h2>
+    <div class="mini">${rest.map(r=>`<div class="m"><span>${esc(byId[r.id].name)}</span><b>${toArabicNum(r.pct)}٪</b></div>`).join("")}<div class="m"><span>${esc(byId[R.projects[2].id].name)} (مشروع)</span><b>${toArabicNum(R.projects[2].pct)}٪</b></div></div>
+    <p class="small muted">عايز تعرف أي ملف أكتر؟ <a href="#guide">اعرف الملفات والمشاريع</a>.</p></section>
+  <section class="card"><h3>ابعت نتيجتك للجنة التسكين</h3>
+    <p class="small muted">انسخ الملخص وابعته على جروب المتابعة أو لمسؤول التسكين.</p>
+    <textarea class="copy" id="summary" readonly>${esc(summaryText())}</textarea>
+    <div class="row"><button class="btn" id="copyBtn" type="button">انسخ الملخص</button><button class="btn ghost" id="redo" type="button">جاوب من الأول</button><button class="btn ghost" id="edit" type="button">عدّل إجاباتك</button></div>
+  </section>`;
+  document.getElementById("copyBtn").onclick=()=>copyText(summaryText(),document.getElementById("summary"));
+  document.getElementById("redo").onclick=()=>{A={};step=0;lastResult=null;saveDraft();renderQuiz();};
+  document.getElementById("edit").onclick=()=>{lastResult=null;step=0;saveDraft();renderQuiz();};
+  updateSaveState();
+}
+function summaryText(){
+  const R=lastResult; const i=A.info||{};
+  const f=R.topFiles.map((r,ix)=>`${ix+1}. ${byId[r.id].name} (${r.pct}%)`).join("\n");
+  const p=R.topProjects.map((r,ix)=>`${ix+1}. ${byId[r.id].name} (${r.pct}%)`).join("\n");
+  return `بوصلة التسكين – صناع الحياة الدقهلية\nالاسم: ${i.name||"-"}\nالموبايل: ${i.phone||"-"}\nالسن: ${i.age||"-"} | المركز: ${i.center||"-"}\n\nأنسب الملفات:\n${f}\n\nأنسب المشاريع:\n${p}${A.fav&&A.fav!=="none"?`\n\nكان في دماغي: ${byId[A.fav].name}`:""}${A.portfolio&&A.portfolio.link?`\nأعمالي: ${A.portfolio.link}`:""}`;
+}
+function copyText(t,el){
+  const done=()=>toast("اتنسخ");
+  try{ navigator.clipboard.writeText(t).then(done,()=>{el.select();toast("حدد النص وانسخه يدوي");}); }
+  catch(e){ el.select(); toast("حدد النص وانسخه يدوي"); }
+}
+let toastT; function toast(t){const e=document.getElementById("toast");e.textContent=t;e.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>e.hidden=true,2200);}
+
+/* ============ GUIDE ============ */
+function renderGuide(){
+  const sec=(type,title,intro)=>`<section class="sect"><h2>${title}</h2><p class="muted">${intro}</p>${ENT.filter(e=>e.type===type).map(e=>`
+    <details class="ent" id="ent-${e.id}"><summary><h3>${esc(e.name)} <span class="muted small" dir="ltr">${esc(e.en)}</span></h3><span class="tag ${type==="project"?"p":""}">${type==="project"?"مشروع":"ملف"}</span></summary>
+    <div class="body"><p>${esc(e.tagline)}</p>
+      <div><b>هتعمل إيه</b><ul class="list">${e.does.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>
+      <div><b>الأدوار جواه</b><div class="chips">${e.roles.map(r=>`<span class="chip">${esc(r)}</span>`).join("")}</div></div>
+      <div><b>محتاج منك</b><div class="chips">${Object.entries(e.w).filter(([,w])=>w>=4).map(([d])=>`<span class="chip">${esc(DIMS[d].label)}</span>`).join("")}</div></div>
+      <div class="note info">${esc(e.needs)}${e.req.length?` <b>شروط إلزامية:</b> ${e.req.map(r=>esc(COMMIT[r])).join("، ")}.`:""}</div>
+      <p class="small muted">المصدر: ${esc(e.src)}</p></div></details>`).join("")}</section>`;
+  document.getElementById("view-guide").innerHTML=`
+   <section class="card"><h2>رحلة المتطوع والتسكين</h2>
+   <p>بعد الاستقبال، بتملا استمارة البيانات وتشارك في الملفات وانت في جروب المتابعة. لما تكمّل الحد الأدنى من ساعات المشاركة وتتفاعل كويس، لجنة التسكين بتسكنك في <b>ملفين أساسيين بحد أقصى</b>، وتقدر تشارك في الباقي كنزولات فرعية. تغيير الملف مسموح بعد مدة محددة من تاريخ التسكين.</p>
+   <p class="small muted">الملفات شغل مستمر طول السنة. المشاريع تدخلات متخصصة ليها فئة معينة وتمويل ومدة.</p></section>
+   ${sec("file","الملفات الـ12","كل ملف مسؤول عن نوع شغل ثابت في الفرع.")}
+   ${sec("project","المشاريع الـ3","مشاريع ليها فئة مستهدفة خاصة وشروط تدريب.")}`;
+}
+
+/* ============ DB (save + committee) ============ */
+let db=null, user=null, uid=null, saveStatus="pending";
+(async()=>{
+  try{ if(!window.claude||!window.claude.use){saveStatus="off";updateSaveState();return;}
+    [db,user]=await Promise.all([claude.use("db"),claude.use("user")]);
+    if(user){ try{uid=await user.id();}catch(e){} }
+    if(!db||!uid){saveStatus="off";updateSaveState();return;}
+    saveStatus="ready"; if(lastResult) saveSubmission(); else updateSaveState();
+    let admin=false; try{admin=await user.canEdit();}catch(e){}
+    if(admin){ document.getElementById("tabCommittee").hidden=false; startCommittee(); }
+  }catch(e){saveStatus="off";updateSaveState();}
+})();
+async function saveSubmission(){
+  if(!lastResult) return;
+  if(saveStatus!=="ready"&&saveStatus!=="saved"&&saveStatus!=="error"){updateSaveState();return;}
+  if(!db||!uid){saveStatus="off";updateSaveState();return;}
+  saveStatus="saving"; updateSaveState();
+  const R=lastResult;
+  const doc={info:A.info||{},fav:A.fav||null,portfolio:A.portfolio||null,answers:A,
+    topFiles:R.topFiles.map(r=>({id:r.id,pct:r.pct})),topProjects:R.topProjects.map(r=>({id:r.id,pct:r.pct})),
+    allScores:Object.fromEntries(R.files.concat(R.projects).map(r=>[r.id,r.pct])),
+    flags:R.flags,confidence:Math.round(R.confidence*100),at:R.at};
+  try{ await db.collection("submissions").doc(uid).set(doc); saveStatus="saved"; }
+  catch(e){ saveStatus="error"; }
+  updateSaveState();
+}
+function updateSaveState(){
+  const el=document.getElementById("saveState"); if(!el) return;
+  el.textContent = {pending:"جاري حفظ نتيجتك للجنة...",ready:"جاري الحفظ...",saving:"جاري الحفظ...",
+    saved:"✓ نتيجتك اتحفظت، ولجنة التسكين تقدر تشوفها.",
+    error:"مقدرناش نحفظ نتيجتك أوتوماتيك. انسخ الملخص اللي تحت وابعته للجنة.",
+    off:"الحفظ الأوتوماتيك مش متاح هنا. انسخ الملخص اللي تحت وابعته للجنة."}[saveStatus]||"";
+}
+let committeeRows=[], committeeState="loading";
+function startCommittee(){
+  const t=setTimeout(()=>{ if(committeeState==="loading"){committeeState="slow";renderCommittee();} },10000);
+  db.collection("submissions").onSnapshot(snap=>{
+    if(!snap.metadata.fromCache) clearTimeout(t);
+    committeeRows=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.at||"").localeCompare(a.at||""));
+    committeeState=snap.metadata.fromCache?"cached":"live"; renderCommittee();
+  },err=>{clearTimeout(t);committeeState="error";renderCommittee();});
+  renderCommittee();
+}
+function renderCommittee(){
+  const v=document.getElementById("view-committee");
+  const rows=committeeRows;
+  const counts={}; rows.forEach(r=>(r.topFiles||[]).slice(0,1).forEach(f=>counts[f.id]=(counts[f.id]||0)+1));
+  const status={loading:"جاري تحميل الردود...",slow:"الردود لسه مش واصلة، ممكن تكون قديمة.",cached:"نسخة محفوظة، جاري التحديث...",live:"",error:"مقدرناش نجيب الردود دلوقتي."}[committeeState];
+  v.innerHTML=`<section class="card"><h2>ردود المتطوعين</h2>
+    <p class="muted">${toArabicNum(rows.length)} متطوع جاوبوا. الصفحة دي ظاهرة لمسؤولي الصفحة بس.</p>${status?`<p class="small muted">${status}</p>`:""}
+    ${rows.length?`<div><b>توزيع أول ترشيح على الملفات</b> <span class="small muted">(سياسة التوزيع: ملف واحد ميزيدش عن 25٪)</span><div class="mini" style="margin-top:8px">${ENT.filter(e=>e.type==="file").map(e=>{const c=counts[e.id]||0;const p=rows.length?Math.round(c/rows.length*100):0;return `<div class="m"><span>${esc(e.name)}</span><b style="${p>25?"color:var(--warm)":""}">${toArabicNum(c)} · ${toArabicNum(p)}٪</b></div>`}).join("")}</div></div>`:""}
+    <div class="row"><button class="btn ghost" id="copyTsv" type="button" ${rows.length?"":"disabled"}>انسخ كجدول لـ Google Sheets</button></div>
+    <textarea class="copy" id="tsv" readonly hidden></textarea></section>
+    ${rows.length?`<div class="tablewrap"><table><thead><tr><th>الاسم</th><th>الموبايل</th><th>السن / المركز</th><th>أنسب 3 ملفات</th><th>أنسب مشروعين</th><th>كان في دماغه</th><th>التاريخ</th></tr></thead><tbody>
+    ${rows.map(r=>{const i=r.info||{};return `<tr><td>${esc(i.name)}</td><td dir="ltr">${esc(i.phone)}</td><td>${esc(i.age)} · ${esc(i.center)}</td>
+      <td>${(r.topFiles||[]).map(f=>`${esc(byId[f.id]?.name)} <span class="muted">${toArabicNum(f.pct)}٪</span>`).join("<br>")}</td>
+      <td>${(r.topProjects||[]).map(f=>`${esc(byId[f.id]?.name)} <span class="muted">${toArabicNum(f.pct)}٪</span>`).join("<br>")}</td>
+      <td>${r.fav&&r.fav!=="none"?esc(byId[r.fav]?.name):"-"}${r.portfolio&&r.portfolio.link?`<br><a href="${esc(r.portfolio.link)}" target="_blank" rel="noopener">أعماله</a>`:""}</td>
+      <td class="small">${r.at?new Date(r.at).toLocaleDateString("ar-EG"):""}</td></tr>`}).join("")}</tbody></table></div>`
+    :`<section class="card"><p class="muted">لسه مفيش ردود. أول ما متطوع يخلص الأسئلة، نتيجته هتظهر هنا.</p></section>`}`;
+  const b=document.getElementById("copyTsv"); if(b) b.onclick=()=>{
+    const head=["الاسم","الموبايل","السن","الحالة","المركز","ملف 1","ملف 2","ملف 3","مشروع 1","مشروع 2","كان في دماغه","التاريخ"];
+    const lines=rows.map(r=>{const i=r.info||{};const tf=r.topFiles||[],tp=r.topProjects||[];
+      return [i.name,i.phone,i.age,i.status,i.center,...[0,1,2].map(k=>tf[k]?`${byId[tf[k].id]?.name} ${tf[k].pct}%`:""),...[0,1].map(k=>tp[k]?`${byId[tp[k].id]?.name} ${tp[k].pct}%`:""),r.fav&&r.fav!=="none"?byId[r.fav]?.name:"",r.at||""].map(x=>String(x??"").replace(/\t|\n/g," ")).join("\t");});
+    const t=[head.join("\t")].concat(lines).join("\n"); const ta=document.getElementById("tsv"); ta.value=t; ta.hidden=false; copyText(t,ta);
+  };
+}
+
+/* ============ ROUTING ============ */
+function route(){
+  let tab=(location.hash||"#quiz").slice(1);
+  if(tab.startsWith("ent-")){ tab="guide"; }
+  if(!["quiz","guide","committee"].includes(tab)) tab="quiz";
+  if(tab==="committee"&&document.getElementById("tabCommittee").hidden) tab="quiz";
+  for(const t of ["quiz","guide","committee"]) document.getElementById("view-"+t).hidden=t!==tab;
+  document.querySelectorAll("nav.tabs a").forEach(a=>{ if(a.dataset.tab===tab) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+  if(tab==="guide"){ const h=location.hash.slice(1); if(h.startsWith("ent-")){const d=document.getElementById(h); if(d){d.open=true;d.scrollIntoView();}} }
+}
+renderGuide(); renderQuiz(); route();
+window.addEventListener("hashchange",route);
+</script>
+
+</body>
+</html>
